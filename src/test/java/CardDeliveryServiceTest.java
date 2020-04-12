@@ -1,3 +1,6 @@
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -10,6 +13,12 @@ public class CardDeliveryServiceTest {
     @BeforeAll
     public static void setUp() {
         System.setProperty("chromeoptions.args", "--no-sandbox,--headless,--disable-dev-shm-usage");
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
+
+    @AfterAll
+    public static void tearDownAll () {
+        SelenideLogger.removeListener("allure");
     }
 
     @Test
